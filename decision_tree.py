@@ -77,9 +77,9 @@ for i in range(len(db)):
 
 print(Y)
 #fitting the decision tree to the data
-#clf = tree.DecisionTreeClassifier(criterion = 'entropy')
-#clf = clf.fit(X, Y)
+clf = tree.DecisionTreeClassifier(criterion = 'entropy')
+clf = clf.fit(X, Y)
 
 #plotting the decision tree
-#tree.plot_tree(clf, feature_names=['Age', 'Spectacle', 'Astigmatism', 'Tear'], class_names=['Yes','No'], filled=True, rounded=True)
-#plt.show()
+tree.plot_tree(clf, feature_names=['Age', 'Spectacle', 'Astigmatism', 'Tear'], class_names=['Yes','No'], filled=True, rounded=True)
+plt.show()
