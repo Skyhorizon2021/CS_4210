@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------
-# AUTHOR: your name
-# FILENAME: title of the source file
-# SPECIFICATION: description of the program
+# AUTHOR: Loc Nguyen
+# FILENAME: decision_tree_2.py
+# SPECIFICATION: testing 3 models by ID3
 # FOR: CS 4210- Assignment #2
 # TIME SPENT: how long it took you to complete the assignment
 #-----------------------------------------------------------*/
