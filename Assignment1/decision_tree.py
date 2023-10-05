@@ -18,12 +18,12 @@ X = []
 Y = []
 
 #reading the data in a csv file
-with open('contact_lens.csv', 'r') as csvfile:
+with open('Assignment1/contact_lens.csv', 'r') as csvfile:
   reader = csv.reader(csvfile)
   for i, row in enumerate(reader):
       if i > 0: #skipping the header
          db.append (row)
-         print(row)
+         #print(row)
 
 newdb = copy.deepcopy(db)
 
@@ -75,7 +75,7 @@ for i in range(len(db)):
   elif Y[i] == "No":
     Y[i] = 2
 
-print(Y)
+#print(Y)
 #fitting the decision tree to the data
 clf = tree.DecisionTreeClassifier(criterion = 'entropy')
 clf = clf.fit(X, Y)
