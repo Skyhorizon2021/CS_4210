@@ -63,13 +63,13 @@ def transform_feature_to_num(dataset):
                         dataset[i][j] = 1
                     case "Hypermetrope":
                         dataset[i][j] = 2
-            if j == 2:
+            elif j == 2:
                 match dataset[i][j]:
                     case "Yes":
                         dataset[i][j] = 1
                     case "No":
                         dataset[i][j] = 2
-            if j == 3:
+            elif j == 3:
                 match dataset[i][j]:
                     case "Reduced":
                         dataset[i][j] = 1
