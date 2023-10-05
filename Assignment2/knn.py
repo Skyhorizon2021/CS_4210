@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------
-# AUTHOR: your name
-# FILENAME: title of the source file
-# SPECIFICATION: description of the program
+# AUTHOR: Loc Nguyen
+# FILENAME: knn.py
+# SPECIFICATION: Evaluation of 1NN algorithm
 # FOR: CS 4210- Assignment #2
 # TIME SPENT: how long it took you to complete the assignment
 #-----------------------------------------------------------*/
@@ -10,47 +10,80 @@
 
 #importing some Python libraries
 from sklearn.neighbors import KNeighborsClassifier
-import csv
+import csv, copy
 
+#function to convert 2D array value to float
+def value_to_float_2D(array2D):
+    for i in range(len(array2D)):
+        for j in range(len(array2D[i])):
+            array2D[i][j] = float(array2D[i][j])
+    return array2D
+def value_to_float_1D(array):
+    for i in range(len(array)):
+        array[i] = float(array[i])
+    return array
 db = []
-
+num_of_incorrect_prediction = 0
 #reading the data in a csv file
-with open('binary_points.csv', 'r') as csvfile:
+with open('Assignment2/binary_points.csv', 'r') as csvfile:
   reader = csv.reader(csvfile)
   for i, row in enumerate(reader):
       if i > 0: #skipping the header
          db.append (row)
 
-#loop your data to allow each instance to be your test set
-for ? in db:
 
+
+#loop your data to allow each instance to be your test set
+for data in db:
     #add the training features to the 2D array X removing the instance that will be used for testing in this iteration. For instance, X = [[1, 3], [2, 1,], ...]]. Convert each feature value to
     # float to avoid warning messages
-    #--> add your Python code here
-    # X =
-
+    training_db = copy.deepcopy(db)
+    training_db.remove(data)
+    X = training_db
+    training_class_set = []
+    for i in range(len(X)):
+        training_class_set.append(X[i][2])
+        del X[i][2]
+    
+    #convert 2D str array to float array
+    X = value_to_float_2D(X)
+    #print(X)
+    
     #transform the original training classes to numbers and add to the vector Y removing the instance that will be used for testing in this iteration. For instance, Y = [1, 2, ,...]. Convert each
     #  feature value to float to avoid warning messages
-    #--> add your Python code here
+    #1 = positive, 2 = negative
     # Y =
-
+    for i in range(len(training_class_set)):
+        if training_class_set[i] == "+":
+            training_class_set[i] = 1
+        elif training_class_set[i] == "-":
+            training_class_set[i] = 2
+    Y = training_class_set
+    #convert 1D int array to float array
+    Y = value_to_float_1D(Y)    
+    #print(Y) 
     #store the test sample of this iteration in the vector testSample
     #--> add your Python code here
-    #testSample =
-
+    testSample = data[0:2]
+    testSample = value_to_float_1D(testSample)
+    test_class = data[2]
+    if test_class == "+":
+        test_class = 1.0
+    elif test_class == "-":
+        test_class = 2.0
+    
     #fitting the knn to the data
     clf = KNeighborsClassifier(n_neighbors=1, p=2)
     clf = clf.fit(X, Y)
 
-    #use your test sample in this iteration to make the class prediction. For instance:
-    #class_predicted = clf.predict([[1, 2]])[0]
-    #--> add your Python code here
-
+    #get prediction with testing data
+    class_predicted = clf.predict([testSample])[0]
     #compare the prediction with the true label of the test instance to start calculating the error rate.
-    #--> add your Python code here
-
+    if class_predicted != test_class:
+        num_of_incorrect_prediction += 1
 #print the error rate
-#--> add your Python code here
+error_rate = num_of_incorrect_prediction / len(db)
+print("The error rate for 1NN algorithm:",error_rate)
 
 
 
